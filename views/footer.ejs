@@ -49,6 +49,7 @@
   });
 
 
+
   function loadPage(page_url){
 
 
@@ -59,12 +60,20 @@
       .done(function(data) {  
 
        // $('#page').empty(); 
-        $('#page').html(data); 
-        $('.loader').addClass('hide');
+        $('#page').html(data).addClass('animated fadeIn'); 
+        $('.loader').addClass('animated fadeOut');
 
         var scripts =  $('.script_box').html();
         $('.script_box').empty();  
         $('.script_box').append(scripts);
+
+        $("#page").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){ 
+          $(this).removeClass('animated fadeIn');
+        });
+
+        $(".loader").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){ 
+          $(this).removeClass('animated fadeOut').addClass('hide');
+        });
  
 
       })
